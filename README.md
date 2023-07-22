@@ -1,1 +1,1 @@
-# URL shortener built wirh Rust 🦀
+# URL shortener built with Rust 🦀
