@@ -3,6 +3,8 @@ use serde_json::Value;
 
 async fn shorten(link: String) -> Result<(), Error> {
     let url = "https://api-ssl.bitly.com/v4/shorten";
+    let auth =  format!("Bearer {}", std::env::var("ACCESS_TOKEN").expect("Failed to read env variable"));
+    let auth = auth.trim();    
 
     let client = reqwest::Client::new();
 
@@ -12,7 +14,7 @@ async fn shorten(link: String) -> Result<(), Error> {
     let response = client
         .post(url)
         .header("Content-Type", "application/json")
-        .header("Authorization", "Bearer 8bf4a01160c392087ed7564a4d39fe12cea0d478")
+        .header("Authorization", auth)
         .body(json_data.to_owned())
         .send()
         .await?;
